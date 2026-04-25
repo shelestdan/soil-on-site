@@ -46,6 +46,21 @@
   [headers.values]
     Cache-Control = "public, max-age=2592000"
 
+[[headers]]
+  for = "/Photos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/Photos/webp/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+[[headers]]
+  for = "/Photos/opt/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
 # ── Redirect bare domain → www (optional) ─────────────
 # Uncomment after domain is configured:
 # [[redirects]]

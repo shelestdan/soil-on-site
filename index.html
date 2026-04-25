@@ -42,6 +42,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
 
+  <!-- ── Preload hero image (LCP) ─────────────────────── -->
+  <link rel="preload" as="image" type="image/webp" href="Photos/webp/IMG20260316090825.webp" fetchpriority="high" />
+
   <!-- ── Stylesheet ─────────────────────────────────── -->
   <link rel="stylesheet" href="styles.css" />
 
@@ -257,11 +260,14 @@
     </div>
 
     <div class="hero-image" aria-hidden="true">
-      <img src="Photos/IMG20260316090825.jpg"
-           alt="Green rolling hills and lake in regional NSW — typical Soil On Site service area"
-           width="640" height="480"
-           style="width:100%;height:100%;object-fit:cover;border-radius:14px;"
-           loading="eager" />
+      <picture>
+        <source type="image/webp" srcset="Photos/webp/IMG20260316090825.webp" />
+        <img src="Photos/opt/IMG20260316090825.jpg"
+             alt="Green rolling hills and lake in regional NSW — typical Soil On Site service area"
+             width="640" height="480"
+             style="width:100%;height:100%;object-fit:cover;border-radius:14px;"
+             loading="eager" fetchpriority="high" decoding="sync" />
+      </picture>
     </div>
   </div>
 </section>
@@ -431,14 +437,20 @@
 
   <!-- Photo strip — real site work -->
   <div class="services-photos container" aria-hidden="true">
-    <img src="Photos/IMG20251027102323.jpg"
-         alt="AWTS secondary treatment system installed on rural property in NSW"
-         width="560" height="260"
-         loading="lazy" />
-    <img src="Photos/IMG20250123164330.jpg"
-         alt="Constructed irrigation bed and dispersal area for wastewater management"
-         width="560" height="260"
-         loading="lazy" />
+    <picture>
+      <source type="image/webp" srcset="Photos/webp/IMG20251027102323.webp" />
+      <img src="Photos/opt/IMG20251027102323.jpg"
+           alt="AWTS secondary treatment system installed on rural property in NSW"
+           width="560" height="260"
+           loading="lazy" decoding="async" />
+    </picture>
+    <picture>
+      <source type="image/webp" srcset="Photos/webp/IMG20250123164330.webp" />
+      <img src="Photos/opt/IMG20250123164330.jpg"
+           alt="Constructed irrigation bed and dispersal area for wastewater management"
+           width="560" height="260"
+           loading="lazy" decoding="async" />
+    </picture>
   </div>
 </section>
 
@@ -603,26 +615,35 @@
     </ol>
 
     <div class="process-action-photo">
-      <img src="Photos/IMG20251028105704.jpg"
-           alt="Wastewater engineer conducting borehole investigation on site in regional NSW"
-           width="1100" height="340"
-           loading="lazy" />
+      <picture>
+        <source type="image/webp" srcset="Photos/webp/IMG20251028105704.webp" />
+        <img src="Photos/opt/IMG20251028105704.jpg"
+             alt="Wastewater engineer conducting borehole investigation on site in regional NSW"
+             width="1100" height="340"
+             loading="lazy" decoding="async" />
+      </picture>
     </div>
 
     <div class="process-detail" aria-label="What fieldwork includes">
       <div class="detail-item">
-        <img src="Photos/IMG20251028150929.jpg"
-             alt="Soil profile borehole with tape measure showing soil layers and depth"
-             width="360" height="160"
-             loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="Photos/webp/IMG20251028150929.webp" />
+          <img src="Photos/opt/IMG20251028150929.jpg"
+               alt="Soil profile borehole with tape measure showing soil layers and depth"
+               width="360" height="160"
+               loading="lazy" decoding="async" />
+        </picture>
         <h4><span class="dot" aria-hidden="true"></span>Soil profile examination</h4>
         <p>Visual and tactile profiling at multiple depths to characterise texture, structure, and drainage behaviour.</p>
       </div>
       <div class="detail-item">
-        <img src="Photos/IMG20260316111351.jpg"
-             alt="Extracted soil core sample measured against tape, showing clay and subsoil layers"
-             width="360" height="160"
-             loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="Photos/webp/IMG20260316111351.webp" />
+          <img src="Photos/opt/IMG20260316111351.jpg"
+               alt="Extracted soil core sample measured against tape, showing clay and subsoil layers"
+               width="360" height="160"
+               loading="lazy" decoding="async" />
+        </picture>
         <h4><span class="dot" aria-hidden="true"></span>Borehole logging &amp; sampling</h4>
         <p>Boreholes drilled and logged to understand soil depth, layering, and groundwater conditions across the site.</p>
       </div>
@@ -660,14 +681,20 @@
       </ul>
 
       <div class="areas-photos" aria-hidden="true">
-        <img src="Photos/IMG20250903110626.jpg"
-             alt="Rolling hills and eucalyptus woodland in the Snowy Monaro region"
-             width="360" height="200"
-             loading="lazy" />
-        <img src="Photos/IMG20260217134321.jpg"
-             alt="Rural residential block in regional NSW — typical unsewered property"
-             width="360" height="200"
-             loading="lazy" />
+        <picture>
+          <source type="image/webp" srcset="Photos/webp/IMG20250903110626.webp" />
+          <img src="Photos/opt/IMG20250903110626.jpg"
+               alt="Rolling hills and eucalyptus woodland in the Snowy Monaro region"
+               width="360" height="200"
+               loading="lazy" decoding="async" />
+        </picture>
+        <picture>
+          <source type="image/webp" srcset="Photos/webp/IMG20260217134321.webp" />
+          <img src="Photos/opt/IMG20260217134321.jpg"
+               alt="Rural residential block in regional NSW — typical unsewered property"
+               width="360" height="200"
+               loading="lazy" decoding="async" />
+        </picture>
       </div>
     </div>
 

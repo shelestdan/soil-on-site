@@ -291,42 +291,86 @@ nav { display: flex; align-items: center; gap: 32px; }
 }
 
 /* ─── 5. Hero ────────────────────────────────────────── */
+/* ─── 5. Hero — full-bleed photo bg ──────────────────── */
 #hero {
-  background: var(--green-deep);
-  padding: 72px 24px 80px;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 24px 100px;
   overflow: hidden;
 }
 
+/* Background photo — absolute fill */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+/* Dark gradient overlay — left heavy so text stays readable */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      105deg,
+      rgba(6, 22, 12, 0.82) 0%,
+      rgba(6, 22, 12, 0.70) 45%,
+      rgba(6, 22, 12, 0.30) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(6, 22, 12, 0.25) 0%,
+      rgba(6, 22, 12, 0.55) 100%
+    );
+}
+
+/* Content sits above overlay */
 .hero-inner {
+  position: relative;
+  z-index: 2;
   max-width: var(--max-width);
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 56px;
-  align-items: center;
+  width: 100%;
+}
+
+.hero-content {
+  max-width: 620px;
 }
 
 .hero-eyebrow {
   display: inline-block;
-  background: rgba(111,143,122,0.18);
-  color: var(--green-muted);
-  font-size: 0.78rem;
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.82);
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 4px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(111,143,122,0.25);
+  margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.22);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 h1.hero-title {
-  font-size: clamp(1.85rem, 4vw, 3rem);
-  font-weight: 700;
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  font-weight: 800;
   color: #fff;
-  line-height: 1.18;
-  margin-bottom: 20px;
-  letter-spacing: -0.02em;
+  line-height: 1.12;
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
 }
 h1.hero-title em {
   color: var(--clay);
@@ -334,44 +378,63 @@ h1.hero-title em {
 }
 
 .hero-body {
-  color: rgba(255,255,255,0.72);
-  font-size: 1.05rem;
+  color: rgba(255,255,255,0.80);
+  font-size: 1.1rem;
   line-height: 1.72;
-  margin-bottom: 32px;
-  max-width: 480px;
+  margin-bottom: 36px;
+  max-width: 520px;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 
 .hero-ctas {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 36px;
+  gap: 14px;
+  margin-bottom: 48px;
 }
 .hero-ctas .btn-secondary {
-  color: rgba(255,255,255,0.88);
-  border-color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.90);
+  border-color: rgba(255,255,255,0.40);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 .hero-ctas .btn-secondary:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.12);
   color: #fff;
-  border-color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.65);
 }
 
+/* Trust bar */
 .hero-trust {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.15);
 }
 .trust-item {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgba(255,255,255,0.58);
+  color: rgba(255,255,255,0.65);
   font-size: 0.85rem;
 }
-.trust-icon { width: 18px; height: 18px; color: var(--green-muted); flex-shrink: 0; }
+.trust-icon { width: 17px; height: 17px; color: var(--clay); flex-shrink: 0; }
 
-.hero-image { height: 100%; min-height: 380px; }
+/* Scroll cue */
+.hero-scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255,255,255,0.45);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.45; }
+  50%       { transform: translateX(-50%) translateY(8px); opacity: 0.75; }
+}
 
 /* ─── 6. When You Need a Report ──────────────────────── */
 #when {
@@ -1236,9 +1299,8 @@ footer {
   .nav-links { display: none; }
   .hamburger { display: flex; }
 
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-image { min-height: 260px; }
-  h1.hero-title { font-size: 1.8rem; }
+  h1.hero-title { font-size: 2rem; }
+  #hero { min-height: 100svh; padding: 100px 24px 80px; }
 
   .when-inner { grid-template-columns: 1fr; gap: 40px; }
   .services-grid { grid-template-columns: 1fr 1fr; }
@@ -1259,8 +1321,20 @@ footer {
   .why-grid { grid-template-columns: 1fr; }
   .process-steps { grid-template-columns: 1fr; }
   .areas-grid { grid-template-columns: 1fr; }
+  h1.hero-title { font-size: 1.75rem; letter-spacing: -0.02em; }
+  .hero-body { font-size: 1rem; }
+  .hero-content { max-width: 100%; }
   .hero-ctas { flex-direction: column; }
   .hero-ctas a, .hero-ctas button { width: 100%; justify-content: center; }
+  .hero-trust { gap: 16px; }
+  #hero::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(6, 22, 12, 0.72) 0%,
+      rgba(6, 22, 12, 0.80) 60%,
+      rgba(6, 22, 12, 0.88) 100%
+    );
+  }
   .calc-box { padding: 24px 20px; }
   .contact-form-box { padding: 24px 20px; }
   .calc-result { flex-direction: column; }
@@ -1268,17 +1342,6 @@ footer {
 }
 
 /* ─── 16-A. Site Photography ────────────────────────── */
-
-/* Hero image — fills the right column slot */
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  min-height: 380px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: var(--radius-lg);
-  display: block;
-}
 
 /* Services section — 2-photo strip below the card grid */
 .services-photos {
@@ -1338,7 +1401,6 @@ footer {
 
 /* Responsive photo adjustments */
 @media (max-width: 900px) {
-  .hero-image img { min-height: 260px; }
   .process-action-photo img { height: 220px; }
   .services-photos { grid-template-columns: 1fr; }
   .services-photos img { height: 220px; }

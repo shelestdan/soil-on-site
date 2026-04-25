@@ -1,0 +1,55 @@
+# ═══════════════════════════════════════════════════════
+# Soil On Site — Netlify configuration
+#
+# DEPLOY STEPS:
+#   1. Go to app.netlify.com → "Add new site" → "Deploy manually"
+#   2. Drag the entire Water/ folder onto the drop zone
+#   3. Set custom domain in Site settings → Domain management
+#   4. Update canonical URL, og:url, sitemap.xml, robots.txt with real domain
+#   5. Enable Netlify Forms: add  data-netlify="true"  to <form> in index.html
+#
+# OR connect a GitHub repo for automatic deploys on push.
+# ═══════════════════════════════════════════════════════
+
+[build]
+  publish = "."
+
+# ── Security & performance headers ────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options            = "SAMEORIGIN"
+    X-Content-Type-Options     = "nosniff"
+    X-XSS-Protection           = "1; mode=block"
+    Referrer-Policy            = "strict-origin-when-cross-origin"
+    Permissions-Policy         = "camera=(), microphone=(), geolocation=()"
+
+# ── Long cache for versioned static assets ─────────────
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/script.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/favicon.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# ── Images: cache 30 days ──────────────────────────────
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# ── Redirect bare domain → www (optional) ─────────────
+# Uncomment after domain is configured:
+# [[redirects]]
+#   from   = "https://soilonsite.com.au/*"
+#   to     = "https://www.soilonsite.com.au/:splat"
+#   status = 301
+#   force  = true

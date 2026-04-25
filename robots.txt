@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# UPDATE: replace with real domain before launch
+Sitemap: https://soilonsite.com.au/sitemap.xml

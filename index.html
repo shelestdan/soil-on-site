@@ -846,18 +846,17 @@
             <span class="char-count" id="f-message-count" aria-live="polite"></span>
           </div>
 
-          <!-- Consent -->
-          <div class="form-group full-col" id="fg-consent">
-            <div class="consent-wrap" aria-describedby="f-consent-msg">
-              <input type="checkbox" id="f-consent" name="consent" required aria-invalid="false" />
-              <label for="f-consent">
-                I understand this is an enquiry for assessment and reporting services, not a legal or engineering opinion, and I agree to be contacted regarding my enquiry.
-              </label>
+          <div class="form-group full-col captcha-group" id="fg-captcha">
+            <label for="f-captcha">Spam check <span aria-hidden="true" class="req-star">*</span></label>
+            <div class="captcha-fallback">
+              <span>3 + 4 =</span>
+              <input type="text" id="f-captcha" name="captcha"
+                     required inputmode="numeric" autocomplete="off"
+                     aria-describedby="f-captcha-msg"
+                     aria-invalid="false"
+                     maxlength="2" />
             </div>
-            <span class="field-msg" id="f-consent-msg" role="alert" aria-live="polite" style="margin-top:6px;display:block;"></span>
-          </div>
-
-          <div class="form-group full-col captcha-group">
+            <span class="field-msg" id="f-captcha-msg" role="alert" aria-live="polite"></span>
             <div class="captcha-box" data-netlify-recaptcha="true"></div>
           </div>
 

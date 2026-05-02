@@ -976,8 +976,25 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
 .captcha-group {
   padding-top: 2px;
 }
+.captcha-fallback {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 190px;
+}
+.captcha-fallback span {
+  color: var(--text);
+  font-size: 0.93rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.captcha-fallback input {
+  max-width: 72px;
+  text-align: center;
+}
 .captcha-box {
-  min-height: 78px;
+  min-height: 0;
+  margin-top: 10px;
 }
 
 /* Textarea char count */
@@ -987,54 +1004,6 @@ button { cursor: pointer; font: inherit; border: none; background: none; }
   text-align: right;
 }
 .char-count.warn { color: var(--clay); }
-
-/* Checkbox */
-.consent-wrap {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.consent-wrap input[type="checkbox"] {
-  flex-shrink: 0;
-  width: 18px; height: 18px;
-  margin-top: 2px;
-  border: 2px solid var(--border);
-  border-radius: 4px;
-  background: var(--white);
-  -webkit-appearance: none;
-  appearance: none;
-  cursor: pointer;
-  position: relative;
-  transition: border-color 0.15s, background 0.15s;
-}
-.consent-wrap input[type="checkbox"]:checked {
-  background: var(--green);
-  border-color: var(--green);
-}
-.consent-wrap input[type="checkbox"]:checked::after {
-  content: '';
-  position: absolute;
-  left: 4px; top: 1px;
-  width: 6px; height: 10px;
-  border: 2.5px solid #fff;
-  border-top: none;
-  border-left: none;
-  transform: rotate(45deg);
-}
-.consent-wrap input[type="checkbox"]:focus {
-  outline: 2px solid var(--green);
-  outline-offset: 2px;
-}
-.consent-wrap label {
-  font-size: 0.86rem;
-  color: var(--text-mid);
-  line-height: 1.55;
-  cursor: pointer;
-  font-weight: 400;
-}
-.field-invalid .consent-wrap input[type="checkbox"] {
-  border-color: #c0392b;
-}
 
 /* Honeypot — hidden from real users */
 .hp-field {

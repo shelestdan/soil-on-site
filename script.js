@@ -156,15 +156,15 @@ const VALIDATORS = {
     ok:  'Council area selected.',
     err: () => 'Please select your council area.',
   },
-  'f-consent': {
-    test: el => el.checked,
-    ok:  '',
-    err: () => 'Please tick the box to confirm and proceed.',
-  },
   'f-files': {
     test: el => !el.files.length || el.files[0].size <= MAX_FILE_BYTES,
     ok:  '',
     err: () => 'File must be 8 MB or less. Please email larger files directly.',
+  },
+  'f-captcha': {
+    test: el => el.value.trim() === '7',
+    ok:  'Spam check passed.',
+    err: el => el.value.trim() ? 'Please check the answer.' : 'Spam check is required.',
   },
 };
 

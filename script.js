@@ -3,7 +3,7 @@
    ─ Mobile nav
    ─ Smooth scroll
    ─ FAQ accordion
-   ─ Contact form validation + spam checks + success state
+   ─ Contact form validation + spam checks + Netlify submit
 ═══════════════════════════════════════════════════════ */
 
 /* ── Footer year ─────────────────────────────────────── */
@@ -98,6 +98,8 @@ const isEmail = v =>
   /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,63}$/.test(v.trim()) &&
   !v.includes('..') && v.indexOf('@') > 0;
 
+const MAX_FILE_BYTES = 8 * 1024 * 1024;
+
 /* Validation rules — each entry: { test(el) → bool, ok, err } */
 const VALIDATORS = {
   'f-name': {
@@ -158,6 +160,11 @@ const VALIDATORS = {
     test: el => el.checked,
     ok:  '',
     err: () => 'Please tick the box to confirm and proceed.',
+  },
+  'f-files': {
+    test: el => !el.files.length || el.files[0].size <= MAX_FILE_BYTES,
+    ok:  '',
+    err: () => 'File must be 8 MB or less. Please email larger files directly.',
   },
 };
 
@@ -290,23 +297,29 @@ if (fileInput && fileLabelEl) {
   fileInput.addEventListener('change', () => {
     const files = Array.from(fileInput.files);
     if (!files.length) {
-      fileLabelEl.textContent = 'Attach site plans, surveys, or existing reports (PDF, DWG, JPG — max 10 MB)';
+      fileLabelEl.textContent = 'Attach one plan set, survey, or existing report (PDF, DWG, JPG - max 8 MB)';
+      setFieldState('f-files', 'reset');
       return;
     }
-    const names = files.map(f => f.name).join(', ');
-    const total = (files.reduce((s, f) => s + f.size, 0) / 1024 / 1024).toFixed(1);
-    fileLabelEl.textContent = `${files.length} file${files.length > 1 ? 's' : ''} selected (${total} MB): ${names}`;
+    const file = files[0];
+    const total = (file.size / 1024 / 1024).toFixed(1);
+    fileLabelEl.textContent = `${file.name} selected (${total} MB)`;
+    validateField('f-files');
   });
 }
 
 /* ── Form submit ─────────────────────────────────────── */
 const quoteForm     = document.getElementById('quote-form');
 const formSuccessEl = document.getElementById('form-success');
+const formErrorEl   = document.getElementById('form-error');
 const submitBtn     = document.getElementById('form-submit-btn');
+const formFieldsEl  = quoteForm?.querySelector('.contact-form-grid');
+const formFooterEl  = quoteForm?.querySelector('.form-footer');
 
 if (quoteForm) {
-  quoteForm.addEventListener('submit', e => {
+  quoteForm.addEventListener('submit', async e => {
     e.preventDefault();
+    if (formErrorEl) formErrorEl.classList.remove('visible');
 
     /* ── Spam checks ──────────────────────────────────── */
 
@@ -353,38 +366,41 @@ if (quoteForm) {
       submitBtn.disabled = true;
     }
 
-    /*
-     * ── BACKEND INTEGRATION ──────────────────────────────
-     * Replace the setTimeout block below with a real fetch.
-     *
-     * Option A — Formspree (recommended, free tier):
-     *   const data = new FormData(quoteForm);
-     *   fetch('https://formspree.io/f/YOUR_FORM_ID', {
-     *     method: 'POST', body: data,
-     *     headers: { Accept: 'application/json' }
-     *   })
-     *   .then(r => r.ok ? showSuccess() : showNetworkError())
-     *   .catch(() => showNetworkError());
-     *
-     * Option B — Netlify Forms:
-     *   Add  data-netlify="true"  name="quote"  to <form>.
-     *   Netlify intercepts the POST automatically.
-     *
-     * Option C — EmailJS (emailjs.com, free tier, no backend required).
-     *
-     * TODO: Add server-side CAPTCHA verification (Cloudflare Turnstile or
-     *       Google reCAPTCHA v3) before going live. Never put secret keys here.
-     * ────────────────────────────────────────────────────
-     */
-    setTimeout(showSuccess, 800); /* remove when wired to real backend */
+    const isLocalPreview = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
+    if (isLocalPreview) {
+      setTimeout(showSuccess, 350);
+      return;
+    }
+
+    try {
+      const data = new FormData(quoteForm);
+      const res = await fetch('/', { method: 'POST', body: data });
+      if (!res.ok) throw new Error(`Form submit failed: ${res.status}`);
+      showSuccess();
+    } catch (err) {
+      showNetworkError();
+    }
   });
 }
 
 function showSuccess() {
-  if (quoteForm)     quoteForm.style.display = 'none';
+  if (formFieldsEl) formFieldsEl.style.display = 'none';
+  if (formFooterEl) formFooterEl.style.display = 'none';
+  if (formErrorEl) formErrorEl.classList.remove('visible');
   if (formSuccessEl) {
     formSuccessEl.classList.add('visible');
     formSuccessEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     formSuccessEl.querySelector('h3')?.focus();
+  }
+}
+
+function showNetworkError() {
+  if (submitBtn) {
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+  }
+  if (formErrorEl) {
+    formErrorEl.classList.add('visible');
+    formErrorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 }

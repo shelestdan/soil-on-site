@@ -46,7 +46,7 @@
   <link rel="preload" as="image" type="image/webp" href="Photos/webp/IMG20260316090825.webp" fetchpriority="high" />
 
   <!-- ── Stylesheet ─────────────────────────────────── -->
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260502-premium" />
 
   <!-- ── JSON-LD Structured Data ────────────────────── -->
   <script type="application/ld+json">
@@ -171,8 +171,9 @@
     <div class="hero-content">
       <span class="hero-eyebrow">NSW &amp; ACT · Wastewater Engineers</span>
       <h1 class="hero-title" id="hero-heading">
-        On-Site Sewer Management (OSSM) &ndash; Effluent Disposal &amp; Soil Assessment Reports
+        Council-ready OSSM &amp; soil reports
       </h1>
+      <p class="hero-service-title">On-Site Sewer Management (OSSM) &ndash; Effluent Disposal &amp; Soil Assessment Reports</p>
       <h2 class="hero-subtitle">Expert Wastewater Solutions for Your Development</h2>
       <p class="hero-question">Are you planning a new build or subdivision on a property without a sewer connection?</p>
       <p class="hero-body">
@@ -184,6 +185,20 @@
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary">Request a Quote</a>
       </div>
+      <dl class="hero-proof" aria-label="Soil On Site service summary">
+        <div>
+          <dt>Scope</dt>
+          <dd>OSSM, soil assessment, wastewater reports</dd>
+        </div>
+        <div>
+          <dt>Use</dt>
+          <dd>DA and Section 68 council support</dd>
+        </div>
+        <div>
+          <dt>Area</dt>
+          <dd>NSW and ACT regional properties</dd>
+        </div>
+      </dl>
     </div>
 
     <div class="hero-photo" aria-hidden="true">
@@ -624,12 +639,16 @@
     </div>
 
     <div class="contact-form-box">
+      <div class="form-card-head">
+        <span>Project intake</span>
+        <p>Attach plans where available. Fields marked * are required.</p>
+      </div>
       <!--
         Netlify Forms active: static form detection, honeypot, file upload,
-        and Netlify-provided reCAPTCHA 2 spam protection.
+        honeypot protection, and Cloudflare Turnstile client verification.
       -->
       <form id="quote-form" name="quote" method="POST" enctype="multipart/form-data"
-            data-netlify="true" data-netlify-honeypot="website" data-netlify-recaptcha="true"
+            data-netlify="true" data-netlify-honeypot="website"
             novalidate aria-label="Request a quote form">
         <input type="hidden" name="form-name" value="quote" />
 
@@ -642,6 +661,14 @@
         <input type="hidden" id="f-ts" name="form_ts" />
 
         <div class="contact-form-grid">
+
+          <div class="form-section-label full-col">
+            <span>01</span>
+            <div>
+              <h3>Contact details</h3>
+              <p>Who we should reply to with the quote.</p>
+            </div>
+          </div>
 
           <!-- Name -->
           <div class="form-group" id="fg-name">
@@ -708,6 +735,14 @@
               <span class="vi vi-err" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
             </div>
             <span class="field-msg" id="f-address-msg" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-section-label full-col">
+            <span>02</span>
+            <div>
+              <h3>Site and project</h3>
+              <p>Address, council, and wastewater load details.</p>
+            </div>
           </div>
 
           <!-- Council area -->
@@ -822,6 +857,14 @@
             </div>
           </div>
 
+          <div class="form-section-label full-col">
+            <span>03</span>
+            <div>
+              <h3>Plans and notes</h3>
+              <p>Upload one plan set, then add constraints or questions.</p>
+            </div>
+          </div>
+
           <!-- File upload -->
           <div class="form-group full-col">
             <label for="f-files">Plans, surveys, or existing reports</label>
@@ -846,18 +889,32 @@
             <span class="char-count" id="f-message-count" aria-live="polite"></span>
           </div>
 
-          <div class="form-group full-col captcha-group" id="fg-captcha">
-            <label for="f-captcha">Spam check <span aria-hidden="true" class="req-star">*</span></label>
-            <div class="captcha-fallback">
-              <span>3 + 4 =</span>
-              <input type="text" id="f-captcha" name="captcha"
-                     required inputmode="numeric" autocomplete="off"
-                     aria-describedby="f-captcha-msg"
-                     aria-invalid="false"
-                     maxlength="2" />
+          <div class="form-section-label full-col">
+            <span>04</span>
+            <div>
+              <h3>Spam protection</h3>
+              <p>Cloudflare Turnstile checks the request without puzzle spam.</p>
             </div>
-            <span class="field-msg" id="f-captcha-msg" role="alert" aria-live="polite"></span>
-            <div class="captcha-box" data-netlify-recaptcha="true"></div>
+          </div>
+
+          <div class="form-group full-col captcha-group" id="fg-turnstile">
+            <label>Verification <span aria-hidden="true" class="req-star">*</span></label>
+            <div class="turnstile-panel">
+              <!-- Cloudflare Turnstile test site key. Replace with production site key and server-side Siteverify before final launch. -->
+              <div class="cf-turnstile"
+                   data-sitekey="1x00000000000000000000AA"
+                   data-theme="light"
+                   data-size="flexible"
+                   data-appearance="interaction-only"
+                   data-response-field-name="cf-turnstile-response"
+                   data-callback="onTurnstileSuccess"
+                   data-expired-callback="onTurnstileExpired"
+                   data-error-callback="onTurnstileError"></div>
+              <p>Checks that this request is genuine before it is sent.</p>
+            </div>
+            <input type="hidden" id="f-turnstile" name="turnstile_status"
+                   required aria-describedby="f-turnstile-msg" aria-invalid="false" />
+            <span class="field-msg" id="f-turnstile-msg" role="alert" aria-live="polite"></span>
           </div>
 
         </div><!-- /.contact-form-grid -->
@@ -911,6 +968,13 @@
   </div>
 </footer>
 
-<script src="script.js" defer></script>
+<script src="script.js?v=20260502-premium" defer></script>
+<script>
+  window.__turnstilePending = window.__turnstilePending || {};
+  window.onTurnstileSuccess = token => { window.__turnstilePending.success = token || 'verified'; };
+  window.onTurnstileExpired = () => { window.__turnstilePending.expired = true; };
+  window.onTurnstileError = () => { window.__turnstilePending.error = true; };
+</script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 </html>

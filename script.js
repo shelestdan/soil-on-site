@@ -161,12 +161,40 @@ const VALIDATORS = {
     ok:  '',
     err: () => 'File must be 8 MB or less. Please email larger files directly.',
   },
-  'f-captcha': {
-    test: el => el.value.trim() === '7',
-    ok:  'Spam check passed.',
-    err: el => el.value.trim() ? 'Please check the answer.' : 'Spam check is required.',
+  'f-turnstile': {
+    test: () => Boolean(getTurnstileToken()),
+    ok:  'Verification complete.',
+    err: () => 'Please complete the verification before sending.',
   },
 };
+
+const turnstileField = document.getElementById('f-turnstile');
+const getTurnstileToken = () =>
+  document.querySelector('input[name="cf-turnstile-response"]')?.value?.trim() ||
+  turnstileField?.value?.trim() ||
+  '';
+
+window.onTurnstileSuccess = token => {
+  if (turnstileField) turnstileField.value = token || 'verified';
+  setFieldState('f-turnstile', 'valid', 'Verification complete.');
+};
+window.onTurnstileExpired = () => {
+  if (turnstileField) turnstileField.value = '';
+  setFieldState('f-turnstile', 'invalid', 'Verification expired. Please try again.');
+};
+window.onTurnstileError = () => {
+  if (turnstileField) turnstileField.value = '';
+  setFieldState('f-turnstile', 'invalid', 'Verification could not load. Please refresh and try again.');
+};
+
+const pendingTurnstile = window.__turnstilePending || {};
+if (pendingTurnstile.success) {
+  window.onTurnstileSuccess(pendingTurnstile.success);
+} else if (pendingTurnstile.expired) {
+  window.onTurnstileExpired();
+} else if (pendingTurnstile.error) {
+  window.onTurnstileError();
+}
 
 /* ── State setter ────────────────────────────────────── */
 function setFieldState(id, state, msg) {

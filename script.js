@@ -161,39 +161,45 @@ const VALIDATORS = {
     ok:  '',
     err: () => 'File must be 8 MB or less. Please email larger files directly.',
   },
-  'f-turnstile': {
-    test: () => Boolean(getTurnstileToken()),
+  'f-altcha': {
+    test: () => Boolean(getAltchaPayload() || document.getElementById('f-altcha')?.value),
     ok:  'Verification complete.',
     err: () => 'Please complete the verification before sending.',
   },
 };
 
-const turnstileField = document.getElementById('f-turnstile');
-const getTurnstileToken = () =>
-  document.querySelector('input[name="cf-turnstile-response"]')?.value?.trim() ||
-  turnstileField?.value?.trim() ||
+const altchaField = document.getElementById('f-altcha');
+const altchaWidget = document.getElementById('altcha-widget');
+const getAltchaPayload = () =>
+  document.querySelector('input[name="altcha"]')?.value?.trim() ||
+  altchaWidget?.value?.trim?.() ||
+  altchaWidget?.payload?.trim?.() ||
   '';
 
-window.onTurnstileSuccess = token => {
-  if (turnstileField) turnstileField.value = token || 'verified';
-  setFieldState('f-turnstile', 'valid', 'Verification complete.');
-};
-window.onTurnstileExpired = () => {
-  if (turnstileField) turnstileField.value = '';
-  setFieldState('f-turnstile', 'invalid', 'Verification expired. Please try again.');
-};
-window.onTurnstileError = () => {
-  if (turnstileField) turnstileField.value = '';
-  setFieldState('f-turnstile', 'invalid', 'Verification could not load. Please refresh and try again.');
-};
+function setAltchaStatus(isVerified, message) {
+  if (altchaField) altchaField.value = isVerified ? 'verified' : '';
+  if (!isVerified) {
+    const payloadInput = document.querySelector('input[name="altcha"]');
+    if (payloadInput) payloadInput.value = '';
+  }
+  setFieldState(
+    'f-altcha',
+    isVerified ? 'valid' : 'invalid',
+    message || (isVerified ? 'Verification complete.' : 'Please complete the verification before sending.')
+  );
+}
 
-const pendingTurnstile = window.__turnstilePending || {};
-if (pendingTurnstile.success) {
-  window.onTurnstileSuccess(pendingTurnstile.success);
-} else if (pendingTurnstile.expired) {
-  window.onTurnstileExpired();
-} else if (pendingTurnstile.error) {
-  window.onTurnstileError();
+if (altchaWidget) {
+  altchaWidget.addEventListener('verified', () => setAltchaStatus(true));
+  altchaWidget.addEventListener('expired', () => setAltchaStatus(false, 'Verification expired. Please try again.'));
+  altchaWidget.addEventListener('error', () => setAltchaStatus(false, 'Verification could not load. Please try again.'));
+  altchaWidget.addEventListener('statechange', ev => {
+    const state = ev.detail?.state;
+    if (state === 'verified') setAltchaStatus(true);
+    if (state === 'unverified' || state === 'expired' || state === 'error') {
+      setAltchaStatus(false, 'Please complete the verification before sending.');
+    }
+  });
 }
 
 /* ── State setter ────────────────────────────────────── */
@@ -344,6 +350,44 @@ const submitBtn     = document.getElementById('form-submit-btn');
 const formFieldsEl  = quoteForm?.querySelector('.contact-form-grid');
 const formFooterEl  = quoteForm?.querySelector('.form-footer');
 
+async function ensureAltchaSolved() {
+  if (getAltchaPayload()) {
+    setAltchaStatus(true);
+    return true;
+  }
+
+  if (!altchaWidget || typeof altchaWidget.verify !== 'function') {
+    setAltchaStatus(false, 'Verification could not load. Please refresh and try again.');
+    return false;
+  }
+
+  try {
+    await altchaWidget.verify();
+  } catch (_) {
+    setAltchaStatus(false, 'Verification could not load. Please try again.');
+    return false;
+  }
+
+  const solved = Boolean(getAltchaPayload());
+  setAltchaStatus(solved);
+  return solved;
+}
+
+async function verifyAltchaPayload(payload) {
+  try {
+    const res = await fetch('/api/altcha-verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ altcha: payload }),
+    });
+    if (!res.ok) return false;
+    const data = await res.json().catch(() => ({}));
+    return data?.verified === true || data?.verification?.verified === true;
+  } catch (_) {
+    return false;
+  }
+}
+
 if (quoteForm) {
   quoteForm.addEventListener('submit', async e => {
     e.preventDefault();
@@ -367,6 +411,7 @@ if (quoteForm) {
     }
 
     /* ── Field validation ─────────────────────────────── */
+    await ensureAltchaSolved();
     const failed = validateAll();
 
     if (failed.length) {
@@ -392,6 +437,15 @@ if (quoteForm) {
     if (submitBtn) {
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
+    }
+
+    const altchaPayload = getAltchaPayload();
+    const altchaVerified = await verifyAltchaPayload(altchaPayload);
+    if (!altchaVerified) {
+      if (typeof altchaWidget?.reset === 'function') altchaWidget.reset();
+      setAltchaStatus(false, 'Verification failed. Please try again.');
+      showNetworkError();
+      return;
     }
 
     const isLocalPreview = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);

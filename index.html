@@ -46,7 +46,7 @@
   <link rel="preload" as="image" type="image/webp" href="Photos/webp/IMG20260316090825.webp" fetchpriority="high" />
 
   <!-- ── Stylesheet ─────────────────────────────────── -->
-  <link rel="stylesheet" href="styles.css?v=20260502-premium" />
+  <link rel="stylesheet" href="styles.css?v=20260502-aligned" />
 
   <!-- ── JSON-LD Structured Data ────────────────────── -->
   <script type="application/ld+json">
@@ -645,7 +645,7 @@
       </div>
       <!--
         Netlify Forms active: static form detection, honeypot, file upload,
-        honeypot protection, and Cloudflare Turnstile client verification.
+        honeypot protection, and ALTCHA proof-of-work verification.
       -->
       <form id="quote-form" name="quote" method="POST" enctype="multipart/form-data"
             data-netlify="true" data-netlify-honeypot="website"
@@ -893,28 +893,25 @@
             <span>04</span>
             <div>
               <h3>Spam protection</h3>
-              <p>Cloudflare Turnstile checks the request without puzzle spam.</p>
+              <p>Verification check before sending.</p>
             </div>
           </div>
 
-          <div class="form-group full-col captcha-group" id="fg-turnstile">
-            <label>Verification <span aria-hidden="true" class="req-star">*</span></label>
-            <div class="turnstile-panel">
-              <!-- Cloudflare Turnstile test site key. Replace with production site key and server-side Siteverify before final launch. -->
-              <div class="cf-turnstile"
-                   data-sitekey="1x00000000000000000000AA"
-                   data-theme="light"
-                   data-size="flexible"
-                   data-appearance="interaction-only"
-                   data-response-field-name="cf-turnstile-response"
-                   data-callback="onTurnstileSuccess"
-                   data-expired-callback="onTurnstileExpired"
-                   data-error-callback="onTurnstileError"></div>
-              <p>Checks that this request is genuine before it is sent.</p>
+          <div class="form-group full-col captcha-group" id="fg-altcha">
+            <label for="f-altcha">Verification <span aria-hidden="true" class="req-star">*</span></label>
+            <div class="altcha-panel">
+              <altcha-widget
+                id="altcha-widget"
+                challengeurl="/api/altcha-challenge"
+                name="altcha"
+                auto="off"
+                workers="2"
+                hidefooter
+                hidelogo></altcha-widget>
             </div>
-            <input type="hidden" id="f-turnstile" name="turnstile_status"
-                   required aria-describedby="f-turnstile-msg" aria-invalid="false" />
-            <span class="field-msg" id="f-turnstile-msg" role="alert" aria-live="polite"></span>
+            <input type="hidden" id="f-altcha" name="altcha_status"
+                   required aria-describedby="f-altcha-msg" aria-invalid="false" />
+            <span class="field-msg" id="f-altcha-msg" role="alert" aria-live="polite"></span>
           </div>
 
         </div><!-- /.contact-form-grid -->
@@ -968,13 +965,7 @@
   </div>
 </footer>
 
-<script src="script.js?v=20260502-premium" defer></script>
-<script>
-  window.__turnstilePending = window.__turnstilePending || {};
-  window.onTurnstileSuccess = token => { window.__turnstilePending.success = token || 'verified'; };
-  window.onTurnstileExpired = () => { window.__turnstilePending.expired = true; };
-  window.onTurnstileError = () => { window.__turnstilePending.error = true; };
-</script>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script type="module" src="https://cdn.jsdelivr.net/gh/altcha-org/altcha/dist/altcha.min.js"></script>
+<script src="script.js?v=20260502-altcha" defer></script>
 </body>
 </html>

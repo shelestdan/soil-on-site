@@ -1250,24 +1250,6 @@ section {
   border-color: var(--danger);
 }
 
-.captcha-group {
-  gap: 6px;
-}
-
-.captcha-panel {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 0.86rem;
-  font-weight: 650;
-  line-height: 1.3;
-  padding: 10px 12px;
-}
-
 .hp-field {
   position: absolute;
   width: 1px;
@@ -1294,6 +1276,14 @@ section {
   margin: 0;
   color: var(--muted);
   font-size: 0.8rem;
+}
+
+.form-security-note {
+  flex-basis: 100%;
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 650;
 }
 
 .form-success {
@@ -1502,10 +1492,6 @@ footer {
 
   .form-section-label {
     grid-template-columns: 30px minmax(0, 1fr);
-  }
-
-  .captcha-panel {
-    max-width: 100%;
   }
 
   .footer-top {

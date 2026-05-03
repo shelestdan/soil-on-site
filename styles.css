@@ -1047,10 +1047,15 @@ section {
 .form-group {
   display: grid;
   gap: 4px;
+  grid-template-rows: minmax(34px, auto) auto minmax(14px, auto);
+  align-content: start;
   min-width: 0;
 }
 
 .form-group label {
+  display: flex;
+  align-items: flex-end;
+  min-height: 34px;
   color: var(--ink);
   font-size: 0.82rem;
   font-weight: 750;
@@ -1166,6 +1171,7 @@ section {
 
 .field-hint,
 .char-count {
+  min-height: 14px;
   color: var(--muted);
   font-size: 0.75rem;
   line-height: 1.25;
@@ -1214,25 +1220,15 @@ section {
   gap: 6px;
 }
 
-.altcha-panel {
+.captcha-panel {
   width: 100%;
+  min-height: 78px;
   max-width: 460px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
-}
-
-altcha-widget {
-  display: block;
-  width: 100%;
-  --altcha-border-width: 0;
-  --altcha-border-radius: 8px;
-  --altcha-color-base: #ffffff;
-  --altcha-color-border: transparent;
-  --altcha-color-text: #172019;
-  --altcha-color-border-focus: #2d6f4f;
-  --altcha-color-button: #173f2c;
+  padding: 12px;
 }
 
 .hp-field {
@@ -1471,7 +1467,7 @@ footer {
     grid-template-columns: 30px minmax(0, 1fr);
   }
 
-  .altcha-panel {
+  .captcha-panel {
     max-width: 100%;
   }
 

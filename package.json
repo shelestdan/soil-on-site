@@ -1,8 +1,0 @@
-{
-  "name": "soil-on-site",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "altcha-lib": "^2.0.3"
-  }
-}

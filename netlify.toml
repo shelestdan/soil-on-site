@@ -6,7 +6,7 @@
 #   2. Drag the entire Water/ folder onto the drop zone
 #   3. Set custom domain in Site settings → Domain management
 #   4. Update canonical URL, og:url, sitemap.xml, robots.txt with real domain
-#   5. Enable Netlify Forms: add  data-netlify="true"  to <form> in index.html
+#   5. Confirm the static form endpoint and custom domain before launch
 #
 # OR connect a GitHub repo for automatic deploys on push.
 # ═══════════════════════════════════════════════════════

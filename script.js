@@ -3,16 +3,12 @@
    ─ Mobile nav
    ─ Smooth scroll
    ─ FAQ accordion
-   ─ Contact form validation + spam checks + Netlify submit
+   ─ Contact form validation + static-host form submit
 ═══════════════════════════════════════════════════════ */
 
 /* ── Footer year ─────────────────────────────────────── */
 const yearEl = document.getElementById('footer-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-/* ── Honeypot timestamp (set on page load) ───────────── */
-const tsField = document.getElementById('f-ts');
-if (tsField) tsField.value = Date.now();
 
 /* ── Mobile nav ──────────────────────────────────────── */
 const hamburger = document.getElementById('hamburger');
@@ -80,7 +76,7 @@ document.querySelectorAll('.faq-question').forEach(btn => {
    • phone input     → auto-format as user types (AU format)
    • file input      → show selected filename(s)
    • textarea        → character counter
-   • submit          → honeypot check, timestamp check,
+   • submit          → honeypot check,
                        validate all required, scroll to first error
 ═══════════════════════════════════════════════════════ */
 
@@ -150,11 +146,6 @@ const VALIDATORS = {
       if (v.length < 5) return 'Please enter a more complete address.';
       return 'Address contains invalid characters.';
     },
-  },
-  'f-council': {
-    test: el => el.value !== '',
-    ok:  'Council area selected.',
-    err: () => 'Please select your council area.',
   },
   'f-files': {
     test: el => !el.files.length || el.files[0].size <= MAX_FILE_BYTES,
@@ -325,14 +316,6 @@ if (quoteForm) {
       return;
     }
 
-    /* 2. Timestamp: form filled in under 3 seconds → likely bot */
-    const tsEl   = document.getElementById('f-ts');
-    const loadTs = parseInt(tsEl?.value || '0', 10);
-    if (loadTs && (Date.now() - loadTs) < 3000) {
-      showSuccess(); /* fake success */
-      return;
-    }
-
     /* ── Field validation ─────────────────────────────── */
     const failed = validateAll();
 
@@ -367,14 +350,7 @@ if (quoteForm) {
       return;
     }
 
-    try {
-      const data = new FormData(quoteForm);
-      const res = await fetch('/', { method: 'POST', body: data });
-      if (!res.ok) throw new Error(`Form submit failed: ${res.status}`);
-      showSuccess();
-    } catch (err) {
-      showNetworkError();
-    }
+    HTMLFormElement.prototype.submit.call(quoteForm);
   });
 }
 

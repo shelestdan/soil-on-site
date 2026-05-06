@@ -36,7 +36,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 17px;
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
 }
@@ -44,7 +44,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font);
-  line-height: 1.58;
+  line-height: 1.62;
   color: var(--ink);
   background: var(--page);
   -webkit-font-smoothing: antialiased;
@@ -108,7 +108,7 @@ section {
   display: inline-flex;
   width: fit-content;
   color: var(--clay-dark);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: 0;
@@ -129,7 +129,13 @@ section {
   max-width: 720px;
   margin: 0;
   color: var(--ink-2);
-  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  font-size: 1.08rem;
+}
+
+.section-intro-wide {
+  max-width: 820px;
+  color: var(--muted);
+  font-size: 1rem;
 }
 
 .divider {
@@ -151,7 +157,7 @@ section {
   justify-content: center;
   min-height: 44px;
   border-radius: var(--radius);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 750;
   line-height: 1;
   transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, color 160ms ease, box-shadow 160ms ease;
@@ -287,7 +293,7 @@ section {
 .mobile-nav a {
   border-radius: 999px;
   color: var(--ink-2);
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   font-weight: 650;
   line-height: 1;
 }
@@ -364,27 +370,46 @@ section {
 }
 
 #hero {
+  position: relative;
+  isolation: isolate;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(238, 246, 255, 0.96), rgba(247, 251, 255, 0.98)),
-    var(--surface-soft);
+  min-height: calc(100svh - 68px);
+  background: var(--surface-soft);
   border-bottom: 1px solid var(--line-soft);
 }
 
+.hero-inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(247, 251, 255, 0.995) 0%, rgba(247, 251, 255, 0.985) 58%, rgba(247, 251, 255, 0.62) 78%, rgba(247, 251, 255, 0.08) 100%),
+    linear-gradient(180deg, rgba(228, 242, 251, 0.94), rgba(247, 251, 255, 0.5));
+  pointer-events: none;
+}
+
 .hero-inner {
+  position: relative;
+  z-index: 2;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: clamp(24px, 4vw, 38px);
+  align-items: center;
+  gap: 0;
   width: 100%;
-  max-width: calc(var(--container) + (var(--gutter) * 2));
-  margin-inline: auto;
-  padding: clamp(46px, 6vw, 74px) var(--gutter) clamp(44px, 6vw, 70px);
+  max-width: none;
+  min-height: calc(100svh - 68px);
+  margin-inline: 0;
+  padding: 34px max(var(--gutter), calc((100vw - var(--container)) / 2)) 36px;
+  overflow: hidden;
 }
 
 .hero-content {
+  position: relative;
+  z-index: 2;
   display: grid;
-  gap: 14px;
-  max-width: 100%;
+  gap: 13px;
+  max-width: 960px;
 }
 
 .hero-eyebrow {
@@ -392,54 +417,54 @@ section {
 }
 
 .hero-title {
-  max-width: 1080px;
+  max-width: 960px;
   margin: 0;
   color: var(--ink);
-  font-size: clamp(2.35rem, 5.4vw, 4.6rem);
+  font-size: 3.28rem;
   font-weight: 850;
   line-height: 1.02;
   letter-spacing: 0;
 }
 
 .hero-service-title {
-  max-width: 920px;
+  max-width: 860px;
   margin: 2px 0 0;
   color: var(--clay-dark);
-  font-size: clamp(0.92rem, 1.35vw, 1rem);
+  font-size: 1.02rem;
   font-weight: 800;
   line-height: 1.45;
   text-transform: uppercase;
 }
 
 .hero-subtitle {
-  max-width: 900px;
+  max-width: 860px;
   margin: 0;
   color: var(--green-dark);
-  font-size: clamp(1.2rem, 2vw, 1.58rem);
+  font-size: 1.48rem;
   font-weight: 800;
   line-height: 1.22;
 }
 
 .hero-question {
-  max-width: 860px;
+  max-width: 840px;
   margin: 4px 0 0;
   color: var(--ink);
-  font-size: clamp(1.02rem, 1.3vw, 1.14rem);
+  font-size: 1.08rem;
   font-weight: 750;
 }
 
 .hero-body,
 .hero-body-sub {
-  max-width: 980px;
+  max-width: 820px;
   margin: 0;
   color: var(--ink-2);
-  font-size: clamp(0.98rem, 1.25vw, 1.08rem);
+  font-size: 1.02rem;
 }
 
 .hero-body-sub {
-  max-width: 930px;
+  max-width: 740px;
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .hero-ctas {
@@ -453,14 +478,14 @@ section {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  max-width: 100%;
-  margin-top: 16px;
+  max-width: 920px;
+  margin-top: 12px;
   border-block: 1px solid rgba(43, 120, 183, 0.18);
 }
 
 .hero-proof div {
   min-width: 0;
-  padding: 18px 22px 18px 0;
+  padding: 10px 20px 10px 0;
 }
 
 .hero-proof div + div {
@@ -471,25 +496,28 @@ section {
 .hero-proof dt {
   margin-bottom: 4px;
   color: var(--clay-dark);
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   font-weight: 800;
   text-transform: uppercase;
 }
 
 .hero-proof dd {
   color: var(--ink);
-  font-size: 0.94rem;
+  font-size: 1rem;
   font-weight: 650;
   line-height: 1.42;
 }
 
 .hero-photo {
-  height: clamp(280px, 38vw, 470px);
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: 100%;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border: 0;
+  border-radius: 0;
   background: var(--surface-band);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 .hero-photo picture,
@@ -500,7 +528,8 @@ section {
 
 .hero-photo img {
   object-fit: cover;
-  object-position: center 45%;
+  object-position: center 48%;
+  filter: saturate(0.92) contrast(1.02);
 }
 
 #when,
@@ -552,7 +581,7 @@ section {
   gap: 12px;
   align-items: start;
   color: var(--ink-2);
-  font-size: 0.98rem;
+  font-size: 1.03rem;
 }
 
 .when-icon {
@@ -598,7 +627,7 @@ section {
 .next-step p {
   margin: 9px 0 0;
   color: var(--ink-2);
-  font-size: 0.93rem;
+  font-size: 0.98rem;
   line-height: 1.6;
 }
 
@@ -615,7 +644,7 @@ section {
   border-radius: 999px;
   background: var(--green-soft);
   color: var(--green-dark);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 700;
   line-height: 1;
 }
@@ -653,7 +682,7 @@ section {
 .system-photo figcaption {
   padding: 8px 9px 9px;
   color: var(--green-dark);
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   font-weight: 800;
   line-height: 1.2;
 }
@@ -762,7 +791,7 @@ section {
   gap: 10px;
   align-items: center;
   color: var(--ink-2);
-  font-size: 0.94rem;
+  font-size: 0.98rem;
 }
 
 .field-test-list li::before {
@@ -870,7 +899,7 @@ section {
   padding: 16px 18px;
   color: var(--ink);
   text-align: left;
-  font-size: 0.98rem;
+  font-size: 1.02rem;
   font-weight: 750;
   line-height: 1.35;
 }
@@ -896,7 +925,7 @@ section {
   display: none;
   padding: 0 18px 18px;
   color: var(--ink-2);
-  font-size: 0.93rem;
+  font-size: 0.98rem;
 }
 
 .faq-answer.open {
@@ -943,7 +972,7 @@ section {
 .contact-info p {
   margin: 0;
   color: var(--ink-2);
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .contact-ready {
@@ -953,7 +982,7 @@ section {
 
 .contact-files-note {
   color: var(--muted) !important;
-  font-size: 0.9rem !important;
+  font-size: 0.96rem !important;
 }
 
 .contact-files-note a,
@@ -979,7 +1008,7 @@ section {
   min-width: 0;
   padding: 8px 0;
   color: var(--ink);
-  font-size: 0.94rem;
+  font-size: 1rem;
   font-weight: 750;
   border-bottom: 1px solid var(--line-soft);
 }
@@ -1013,7 +1042,7 @@ section {
 
 .form-card-head span {
   color: var(--green-dark);
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   font-weight: 850;
   text-transform: uppercase;
 }
@@ -1021,7 +1050,7 @@ section {
 .form-card-head p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.96rem;
 }
 
 .contact-form-grid {
@@ -1066,7 +1095,7 @@ section {
 .form-section-label h3 {
   margin: 0;
   color: var(--ink);
-  font-size: 0.95rem;
+  font-size: 1.02rem;
   font-weight: 800;
   line-height: 1.25;
 }
@@ -1074,7 +1103,7 @@ section {
 .form-section-label p {
   margin: 2px 0 0;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.88rem;
   line-height: 1.35;
 }
 
@@ -1091,7 +1120,7 @@ section {
   align-items: flex-end;
   min-height: 34px;
   color: var(--ink);
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   font-weight: 750;
   line-height: 1.3;
 }
@@ -1116,7 +1145,7 @@ section {
   border-radius: var(--radius);
   background: var(--surface);
   color: var(--ink);
-  font-size: 0.92rem;
+  font-size: 1rem;
   line-height: 1.35;
   outline: none;
   transition: border-color 150ms ease, background 150ms ease, box-shadow 150ms ease;
@@ -1191,7 +1220,7 @@ section {
   display: block;
   min-height: 14px;
   color: transparent;
-  font-size: 0.76rem;
+  font-size: 0.82rem;
   line-height: 1.25;
 }
 
@@ -1207,7 +1236,7 @@ section {
 .char-count {
   min-height: 14px;
   color: var(--muted);
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   line-height: 1.25;
 }
 
@@ -1230,7 +1259,7 @@ section {
   background: var(--surface-soft);
   color: var(--ink-2);
   cursor: pointer;
-  font-size: 0.88rem;
+  font-size: 0.94rem;
   font-weight: 650;
 }
 
@@ -1275,14 +1304,14 @@ section {
 .form-required-note {
   margin: 0;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.88rem;
 }
 
 .form-security-note {
   flex-basis: 100%;
   margin: -4px 0 0;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   font-weight: 650;
 }
 
@@ -1318,7 +1347,7 @@ section {
   max-width: 540px;
   margin: 0 auto;
   color: var(--ink-2);
-  font-size: 0.94rem;
+  font-size: 1rem;
 }
 
 .form-error {
@@ -1329,7 +1358,7 @@ section {
   border-radius: var(--radius);
   background: #fff7f6;
   color: #81221a;
-  font-size: 0.9rem;
+  font-size: 0.96rem;
 }
 
 .form-error.visible {
@@ -1367,7 +1396,7 @@ footer {
 .footer-disclaimer,
 .footer-abn {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.86rem;
 }
 
 .footer-contact {
@@ -1378,7 +1407,7 @@ footer {
 
 .footer-contact a {
   color: var(--ink-2);
-  font-size: 0.88rem;
+  font-size: 0.96rem;
   font-weight: 650;
 }
 
@@ -1447,6 +1476,10 @@ footer {
 }
 
 @media (max-width: 680px) {
+  html {
+    font-size: 16px;
+  }
+
   :root {
     --gutter: 20px;
     --section-y: 52px;
@@ -1461,18 +1494,42 @@ footer {
   }
 
   .hero-inner {
-    padding-top: 38px;
+    min-height: auto;
+    padding: 38px var(--gutter) 40px;
+  }
+
+  #hero {
+    min-height: auto;
+  }
+
+  .hero-inner::after {
+    background:
+      linear-gradient(180deg, rgba(247, 251, 255, 0.9) 0%, rgba(247, 251, 255, 0.96) 34%, rgba(247, 251, 255, 0.99) 100%),
+      linear-gradient(90deg, rgba(228, 242, 251, 0.94), rgba(247, 251, 255, 0.78));
+  }
+
+  .hero-content {
+    max-width: 100%;
+    gap: 13px;
   }
 
   .hero-title {
-    font-size: clamp(2.1rem, 12vw, 3.25rem);
+    max-width: 100%;
+    font-size: 2.12rem;
+    line-height: 1.04;
   }
 
-  .hero-photo {
-    height: 260px;
-    margin-inline: calc(var(--gutter) * -1);
-    border-inline: 0;
-    border-radius: 0;
+  .hero-photo img {
+    opacity: 0.34;
+    object-position: center top;
+  }
+
+  .hero-service-title,
+  .hero-subtitle,
+  .hero-question,
+  .hero-body,
+  .hero-body-sub {
+    max-width: 100%;
   }
 
   .process-steps,

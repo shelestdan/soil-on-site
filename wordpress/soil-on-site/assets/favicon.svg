@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Soil On Site brand mark: soil layers + leaf -->
+  <rect width="32" height="32" rx="8" fill="#173D33"/>
+  <!-- Soil layer bands -->
+  <rect x="6" y="20" width="20" height="3" rx="1.5" fill="#B46A3C" opacity="0.9"/>
+  <rect x="6" y="24" width="20" height="3" rx="1.5" fill="#9D5B31" opacity="0.8"/>
+  <!-- Leaf / plant emerging from soil -->
+  <path d="M16 18 C16 18 10 14 11 8 C14 10 16 14 16 18Z" fill="#6F8F7A"/>
+  <path d="M16 18 C16 18 22 13 21 7 C18 9 16 13 16 18Z" fill="#FFFDF8" opacity="0.7"/>
+  <line x1="16" y1="8" x2="16" y2="20" stroke="#6F8F7A" stroke-width="1" stroke-linecap="round"/>
+</svg>

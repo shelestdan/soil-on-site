@@ -32,7 +32,7 @@ add_action('wp_enqueue_scripts', function () {
         'soil-on-site-site',
         get_theme_file_uri('assets/css/site.css'),
         ['soil-on-site-fonts'],
-        '20260508-title-hero'
+        '20260508-title-hero-align'
     );
 
     wp_enqueue_script(

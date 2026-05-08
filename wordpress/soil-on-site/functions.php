@@ -32,14 +32,14 @@ add_action('wp_enqueue_scripts', function () {
         'soil-on-site-site',
         get_theme_file_uri('assets/css/site.css'),
         ['soil-on-site-fonts'],
-        '20260506-hero-type'
+        '20260508-title-hero'
     );
 
     wp_enqueue_script(
         'soil-on-site-site',
         get_theme_file_uri('assets/js/site.js'),
         [],
-        '20260503-final',
+        '20260508-file-limit',
         true
     );
 });
@@ -90,6 +90,11 @@ function sos_handle_quote(): void
 
     $attachments = [];
     if (!empty($_FILES['attachment']['name'])) {
+        if (!empty($_FILES['attachment']['size']) && (int) $_FILES['attachment']['size'] > 16 * 1024 * 1024) {
+            wp_safe_redirect(add_query_arg('quote', 'error', $redirect) . '#contact');
+            exit;
+        }
+
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         $upload = wp_handle_upload($_FILES['attachment'], [

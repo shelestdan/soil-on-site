@@ -19,27 +19,29 @@ $email = sos_mod('sos_email');
 <section id="hero" aria-labelledby="hero-heading">
   <div class="hero-inner">
     <div class="hero-content">
-      <span class="hero-eyebrow"><?php echo esc_html(sos_mod('sos_hero_eyebrow')); ?></span>
-      <h1 class="hero-title" id="hero-heading"><?php echo esc_html(sos_mod('sos_hero_title')); ?></h1>
-      <p class="hero-service-title"><?php echo esc_html(sos_mod('sos_hero_service')); ?></p>
-      <h2 class="hero-subtitle"><?php echo esc_html(sos_mod('sos_hero_subtitle')); ?></h2>
-      <p class="hero-question"><?php echo esc_html(sos_mod('sos_hero_question')); ?></p>
+      <h1 class="hero-title" id="hero-heading"><?php echo wp_kses_post(nl2br(esc_html(sos_mod('sos_hero_title')))); ?></h1>
       <p class="hero-body"><?php echo esc_html(sos_mod('sos_hero_body')); ?></p>
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary"><?php echo esc_html(sos_mod('sos_hero_button')); ?></a>
       </div>
-      <dl class="hero-proof" aria-label="<?php esc_attr_e('Soil On Site service summary', 'soil-on-site'); ?>">
-        <?php foreach (sos_pipe_rows('sos_hero_proof') as $row) : ?>
-          <div>
-            <dt><?php echo esc_html($row['title']); ?></dt>
-            <dd><?php echo esc_html($row['body']); ?></dd>
-          </div>
-        <?php endforeach; ?>
-      </dl>
     </div>
 
+    <dl class="hero-proof" aria-label="<?php esc_attr_e('Soil On Site service summary', 'soil-on-site'); ?>">
+      <?php foreach (sos_pipe_rows('sos_hero_proof') as $index => $row) : ?>
+        <div>
+          <?php echo sos_proof_icon($index); ?>
+          <dt><?php echo esc_html($row['title']); ?></dt>
+          <dd><?php echo esc_html($row['body']); ?></dd>
+        </div>
+      <?php endforeach; ?>
+    </dl>
+
     <div class="hero-photo" aria-hidden="true">
-      <?php sos_image('sos_hero_image', 'assets/photos/webp/IMG20260316090825.webp', 'assets/photos/opt/IMG20260316090825.jpg', 'Rural property in regional NSW — typical Soil On Site service area', 'width="700" height="520" loading="eager" fetchpriority="high" decoding="sync"'); ?>
+      <?php if (get_theme_mod('sos_hero_image', '')) : ?>
+        <img src="<?php echo esc_url(get_theme_mod('sos_hero_image', '')); ?>" alt="<?php esc_attr_e('Illustration of on-site domestic sewer management system', 'soil-on-site'); ?>" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="sync" />
+      <?php else : ?>
+        <img src="<?php echo esc_url(sos_asset('assets/photos/hero-onsite-system.png')); ?>" alt="<?php esc_attr_e('Illustration of on-site domestic sewer management system with house, tank, and effluent disposal area', 'soil-on-site'); ?>" width="1536" height="1024" loading="eager" fetchpriority="high" decoding="sync" />
+      <?php endif; ?>
     </div>
   </div>
 </section>
@@ -285,7 +287,7 @@ $email = sos_mod('sos_email');
             <label for="f-files">Plans, surveys, or existing reports</label>
             <label class="file-label" id="file-label-el" for="f-files">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span id="file-label-text">Attach one plan set, survey, or existing report (PDF, DWG, JPG - max 8 MB)</span>
+              <span id="file-label-text">Attach one plan set, survey, or existing report (PDF, DWG, JPG - max 16 MB)</span>
             </label>
             <input type="file" id="f-files" name="attachment" accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx" aria-describedby="f-files-msg" style="position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;" />
             <span class="field-msg" id="f-files-msg" role="alert" aria-live="polite"></span>

@@ -19,7 +19,7 @@ $email = sos_mod('sos_email');
   <meta name="robots" content="index, follow" />
   <link rel="icon" type="image/svg+xml" href="<?php echo esc_url(sos_asset('assets/favicon.svg')); ?>" />
   <link rel="apple-touch-icon" href="<?php echo esc_url(sos_asset('assets/favicon.svg')); ?>" />
-  <link rel="preload" as="image" type="image/webp" href="<?php echo esc_url(sos_asset('assets/photos/webp/IMG20260316090825.webp')); ?>" fetchpriority="high" />
+  <link rel="preload" as="image" type="image/png" href="<?php echo esc_url(sos_asset('assets/photos/hero-onsite-system.png')); ?>" fetchpriority="high" />
   <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
@@ -37,7 +37,7 @@ $email = sos_mod('sos_email');
       <a href="#process">Process</a>
       <a href="#areas">Areas</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact" class="nav-cta">Request a Quote</a>
+      <a href="#contact" class="nav-cta">Contact Us</a>
     </nav>
 
     <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="<?php esc_attr_e('Toggle navigation menu', 'soil-on-site'); ?>">
@@ -50,7 +50,7 @@ $email = sos_mod('sos_email');
     <a href="#process">Process</a>
     <a href="#areas">Areas</a>
     <a href="#faq">FAQ</a>
-    <a href="#contact" class="nav-cta">Request a Quote</a>
+    <a href="#contact" class="nav-cta">Contact Us</a>
   </nav>
 </header>
 

@@ -43,10 +43,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&amp;display=swap" rel="stylesheet" />
 
   <!-- ── Preload hero image (LCP) ─────────────────────── -->
-  <link rel="preload" as="image" type="image/webp" href="Photos/webp/IMG20260316090825.webp" fetchpriority="high" />
+  <link rel="preload" as="image" type="image/png" href="Photos/hero-onsite-system.png" fetchpriority="high" />
 
   <!-- ── Stylesheet ─────────────────────────────────── -->
-  <link rel="stylesheet" href="styles.css?v=20260506-hero-type" />
+  <link rel="stylesheet" href="styles.css?v=20260508-title-hero" />
 
   <!-- ── JSON-LD Structured Data ────────────────────── -->
   <script type="application/ld+json">
@@ -146,7 +146,7 @@
       <a href="#process">Process</a>
       <a href="#areas">Areas</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact" class="nav-cta">Request a Quote</a>
+      <a href="#contact" class="nav-cta">Contact Us</a>
     </nav>
 
     <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation menu">
@@ -159,7 +159,7 @@
     <a href="#process">Process</a>
     <a href="#areas">Areas</a>
     <a href="#faq">FAQ</a>
-    <a href="#contact" class="nav-cta">Request a Quote</a>
+    <a href="#contact" class="nav-cta">Contact Us</a>
   </nav>
 </header>
 
@@ -169,41 +169,43 @@
 <section id="hero" aria-labelledby="hero-heading">
   <div class="hero-inner">
     <div class="hero-content">
-      <span class="hero-eyebrow">NSW &amp; ACT · Wastewater Engineers</span>
       <h1 class="hero-title" id="hero-heading">
-        On-Site Sewer Management (OSSM) &ndash; Effluent Disposal &amp; Soil Assessment Reports
+        On-Site Domestic<br />
+        Sewer Management -<br />
+        Effluent Disposal Assessment
       </h1>
-      <p class="hero-service-title">Council-ready soil assessment and wastewater reports for NSW &amp; ACT.</p>
-      <h2 class="hero-subtitle">Expert Wastewater Solutions for Your Development</h2>
-      <p class="hero-question">Are you planning a new build or subdivision on a property without a sewer connection?</p>
       <p class="hero-body">
-        Soil On Site provides professional, council-ready On-Site Sewage Management (OSSM) and soil assessment reports. Our reports are designed to streamline your Development Application (DA) and ensure full compliance with AS/NZS 1547 and local government requirements across NSW and ACT.
+        Soil On Site provides effluent-disposal assessments for unsewered properties. Our assessments are compliant with AS/NZS 1547 and local government requirements across NSW. We assess the site with consideration of climate, soils, infrastructure, and topography to identify constraints and determine land capability for optimal wastewater management.
       </p>
       <div class="hero-ctas">
         <a href="#contact" class="btn-primary">Request a Quote</a>
       </div>
-      <dl class="hero-proof" aria-label="Soil On Site service summary">
+    </div>
+
+    <dl class="hero-proof" aria-label="Soil On Site service summary">
         <div>
-          <dt>Scope</dt>
-          <dd>OSSM, soil assessment, wastewater reports</dd>
+          <span class="proof-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 8h15l7 7v25H14z"/><path d="M29 8v8h7"/><path d="M19 21h10M19 27h8"/><circle cx="32" cy="33" r="7"/><path d="m29 33 2 2 4-5"/></svg></span>
+          <dt>Compliant</dt><dd>Compliant with AS/NZS 1547 and local government requirements across NSW.</dd>
         </div>
         <div>
-          <dt>Use</dt>
-          <dd>DA and Section 68 council support</dd>
+          <span class="proof-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><rect x="13" y="10" width="22" height="30" rx="3"/><path d="M19 10v-2h10v2"/><path d="m18 20 2 2 4-5M27 21h6M18 29l2 2 4-5M27 30h6"/></svg></span>
+          <dt>Comprehensive Assessment</dt><dd>We assess the site with consideration of climate, soils, infrastructure, and topography.</dd>
         </div>
         <div>
-          <dt>Area</dt>
-          <dd>NSW and ACT regional properties</dd>
+          <span class="proof-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="m8 34 12-20 10 16 5-7 7 11z"/><path d="M20 14h1"/></svg></span>
+          <dt>Identifying Constraints</dt><dd>We identify constraints and determine land capability for optimal wastewater management.</dd>
+        </div>
+        <div>
+          <span class="proof-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M9 24 24 11l15 13v17H14V25"/><path d="M30 41V29H18v12"/><path d="M31 21c-7 3-10 8-10 15 7-1 12-6 13-14z"/></svg></span>
+          <dt>Unsewered Properties</dt><dd>Specialising in effluent-disposal assessments for unsewered properties.</dd>
         </div>
       </dl>
-    </div>
 
     <div class="hero-photo" aria-hidden="true">
       <picture>
-        <source type="image/webp" srcset="Photos/webp/IMG20260316090825.webp" />
-        <img src="Photos/opt/IMG20260316090825.jpg"
-             alt="Rural property in regional NSW — typical Soil On Site service area"
-             width="700" height="520"
+        <img src="Photos/hero-onsite-system.png"
+             alt="Illustration of on-site domestic sewer management system with house, tank, and effluent disposal area"
+             width="1536" height="1024"
              loading="eager" fetchpriority="high" decoding="sync" />
       </picture>
     </div>
@@ -849,7 +851,7 @@
             <label for="f-files">Plans, surveys, or existing reports</label>
             <label class="file-label" id="file-label-el" for="f-files">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              <span id="file-label-text">Attach one plan set, survey, or existing report (PDF, DWG, JPG - max 8 MB)</span>
+              <span id="file-label-text">Attach one plan set, survey, or existing report (PDF, DWG, JPG - max 16 MB)</span>
             </label>
             <input type="file" id="f-files" name="attachment"
                    accept=".pdf,.jpg,.jpeg,.png,.dwg,.doc,.docx"

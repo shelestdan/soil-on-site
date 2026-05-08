@@ -94,7 +94,7 @@ const isEmail = v =>
   /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,63}$/.test(v.trim()) &&
   !v.includes('..') && v.indexOf('@') > 0;
 
-const MAX_FILE_BYTES = 8 * 1024 * 1024;
+const MAX_FILE_BYTES = 16 * 1024 * 1024;
 
 /* Validation rules — each entry: { test(el) → bool, ok, err } */
 const VALIDATORS = {
@@ -150,7 +150,7 @@ const VALIDATORS = {
   'f-files': {
     test: el => !el.files.length || el.files[0].size <= MAX_FILE_BYTES,
     ok:  '',
-    err: () => 'File must be 8 MB or less. Please email larger files directly.',
+    err: () => 'File must be 16 MB or less. Please email larger files directly.',
   },
 };
 
@@ -283,7 +283,7 @@ if (fileInput && fileLabelEl) {
   fileInput.addEventListener('change', () => {
     const files = Array.from(fileInput.files);
     if (!files.length) {
-      fileLabelEl.textContent = 'Attach one plan set, survey, or existing report (PDF, DWG, JPG - max 8 MB)';
+      fileLabelEl.textContent = 'Attach one plan set, survey, or existing report (PDF, DWG, JPG - max 16 MB)';
       setFieldState('f-files', 'reset');
       return;
     }

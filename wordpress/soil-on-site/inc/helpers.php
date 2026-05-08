@@ -14,13 +14,13 @@ function sos_defaults(): array
         'sos_logo_name' => 'Soil On Site',
         'sos_logo_sub' => 'OSSM & Wastewater Reports — NSW & ACT',
         'sos_hero_eyebrow' => 'NSW & ACT · Wastewater Engineers',
-        'sos_hero_title' => 'On-Site Sewer Management (OSSM) – Effluent Disposal & Soil Assessment Reports',
+        'sos_hero_title' => "On-Site Domestic\nSewer Management -\nEffluent Disposal Assessment",
         'sos_hero_service' => 'Council-ready soil assessment and wastewater reports for NSW & ACT.',
         'sos_hero_subtitle' => 'Expert Wastewater Solutions for Your Development',
         'sos_hero_question' => 'Are you planning a new build or subdivision on a property without a sewer connection?',
-        'sos_hero_body' => 'Soil On Site provides professional, council-ready On-Site Sewage Management (OSSM) and soil assessment reports. Our reports are designed to streamline your Development Application (DA) and ensure full compliance with AS/NZS 1547 and local government requirements across NSW and ACT.',
+        'sos_hero_body' => 'Soil On Site provides effluent-disposal assessments for unsewered properties. Our assessments are compliant with AS/NZS 1547 and local government requirements across NSW. We assess the site with consideration of climate, soils, infrastructure, and topography to identify constraints and determine land capability for optimal wastewater management.',
         'sos_hero_button' => 'Request a Quote',
-        'sos_hero_proof' => "Scope|OSSM, soil assessment, wastewater reports\nUse|DA and Section 68 council support\nArea|NSW and ACT regional properties",
+        'sos_hero_proof' => "Compliant|Compliant with AS/NZS 1547 and local government requirements across NSW.\nComprehensive Assessment|We assess the site with consideration of climate, soils, infrastructure, and topography.\nIdentifying Constraints|We identify constraints and determine land capability for optimal wastewater management.\nUnsewered Properties|Specialising in effluent-disposal assessments for unsewered properties.",
         'sos_when_label' => 'OSSM Reports',
         'sos_when_title' => 'When Do You Need an OSSM Report?',
         'sos_when_intro' => 'You will typically require a formal assessment when:',
@@ -139,6 +139,18 @@ function sos_image(string $setting, string $webp, string $jpg, string $alt, stri
 function sos_tel_href(string $phone): string
 {
     return 'tel:' . preg_replace('/[^\d+]/', '', $phone);
+}
+
+function sos_proof_icon(int $index): string
+{
+    $icons = [
+        '<svg viewBox="0 0 48 48" fill="none"><path d="M14 8h15l7 7v25H14z"/><path d="M29 8v8h7"/><path d="M19 21h10M19 27h8"/><circle cx="32" cy="33" r="7"/><path d="m29 33 2 2 4-5"/></svg>',
+        '<svg viewBox="0 0 48 48" fill="none"><rect x="13" y="10" width="22" height="30" rx="3"/><path d="M19 10v-2h10v2"/><path d="m18 20 2 2 4-5M27 21h6M18 29l2 2 4-5M27 30h6"/></svg>',
+        '<svg viewBox="0 0 48 48" fill="none"><path d="m8 34 12-20 10 16 5-7 7 11z"/><path d="M20 14h1"/></svg>',
+        '<svg viewBox="0 0 48 48" fill="none"><path d="M9 24 24 11l15 13v17H14V25"/><path d="M30 41V29H18v12"/><path d="M31 21c-7 3-10 8-10 15 7-1 12-6 13-14z"/></svg>',
+    ];
+
+    return '<span class="proof-icon" aria-hidden="true">' . ($icons[$index % count($icons)] ?? $icons[0]) . '</span>';
 }
 
 function sos_form_input(string $id, string $name, string $label, string $type, bool $required, string $placeholder, string $autocomplete, string $hint = '', bool $full = false): void

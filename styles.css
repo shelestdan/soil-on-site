@@ -24,6 +24,7 @@
   --container: 1180px;
   --gutter: clamp(20px, 4vw, 48px);
   --section-y: clamp(56px, 7vw, 84px);
+  --hero-proof-h: 218px;
   --radius: 8px;
   --shadow: 0 18px 48px rgba(8, 58, 92, 0.08);
   --shadow-sm: 0 8px 22px rgba(8, 58, 92, 0.06);
@@ -415,7 +416,7 @@ body.admin-bar #site-header {
   max-width: none;
   min-height: 100svh;
   margin-inline: 0;
-  padding: 155px 56px 218px;
+  padding: 155px 56px var(--hero-proof-h);
   overflow: hidden;
 }
 
@@ -510,7 +511,7 @@ body.admin-bar #site-header {
   gap: 0;
   max-width: none;
   min-height: 0;
-  height: 218px;
+  height: var(--hero-proof-h);
   margin: 0;
   padding: 0 54px;
   align-items: center;
@@ -552,6 +553,7 @@ body.admin-bar #site-header {
   stroke-width: 2.45;
   stroke-linecap: round;
   stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
 
 .hero-proof dt {
@@ -572,9 +574,8 @@ body.admin-bar #site-header {
 
 .hero-photo {
   position: absolute;
-  inset: 0;
+  inset: 0 0 var(--hero-proof-h);
   z-index: 0;
-  height: 100%;
   overflow: hidden;
   border: 0;
   border-radius: 0;
@@ -589,9 +590,11 @@ body.admin-bar #site-header {
 }
 
 .hero-photo img {
-  object-fit: cover;
-  object-position: 38% center;
+  object-fit: contain;
+  object-position: right bottom;
   filter: none;
+  transform: scale(0.96);
+  transform-origin: right bottom;
 }
 
 #when,
@@ -1599,6 +1602,10 @@ footer {
     min-height: 0;
     margin: 30px -36px -40px;
     padding: 26px 36px 30px;
+  }
+
+  .hero-photo {
+    inset: 0;
   }
 
   .hero-proof div {

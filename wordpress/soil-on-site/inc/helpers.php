@@ -14,7 +14,7 @@ function sos_defaults(): array
         'sos_logo_name' => 'Soil On Site',
         'sos_logo_sub' => 'OSSM & Wastewater Reports — NSW & ACT',
         'sos_hero_eyebrow' => 'NSW & ACT · Wastewater Engineers',
-        'sos_hero_title' => "On-Site Domestic\nSewer Management -\nEffluent Disposal Assessment",
+        'sos_hero_title' => "On-Site Domestic\nSewer Management -\nEffluent Disposal\nAssessment",
         'sos_hero_service' => 'Council-ready soil assessment and wastewater reports for NSW & ACT.',
         'sos_hero_subtitle' => 'Expert Wastewater Solutions for Your Development',
         'sos_hero_question' => 'Are you planning a new build or subdivision on a property without a sewer connection?',

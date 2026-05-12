@@ -32,7 +32,7 @@ add_action('wp_enqueue_scripts', function () {
         'soil-on-site-site',
         get_theme_file_uri('assets/css/site.css'),
         ['soil-on-site-fonts'],
-        '20260512-icons-cta'
+        '20260512-responsive-pass'
     );
 
     wp_enqueue_script(

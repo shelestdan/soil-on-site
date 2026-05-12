@@ -74,16 +74,17 @@ $email = sos_mod('sos_email');
           <li><?php echo esc_html($chip); ?></li>
         <?php endforeach; ?>
       </ul>
-      <div class="system-photo-grid" aria-label="<?php esc_attr_e('Examples of on-site wastewater systems', 'soil-on-site'); ?>">
-        <figure class="system-photo">
-          <?php sos_image('sos_system_image_one', 'assets/photos/webp/IMG20250123164330.webp', 'assets/photos/opt/IMG20250123164330.jpg', 'Effluent disposal bed on a rural property', 'width="480" height="360" loading="eager" decoding="async"'); ?>
-          <figcaption>Disposal area</figcaption>
-        </figure>
-        <figure class="system-photo">
-          <?php sos_image('sos_system_image_two', 'assets/photos/webp/IMG20251027102323.webp', 'assets/photos/opt/IMG20251027102323.jpg', 'On-site wastewater treatment tank access lids', 'width="480" height="360" loading="eager" decoding="async"'); ?>
-          <figcaption>Treatment system</figcaption>
-        </figure>
-      </div>
+    </div>
+
+    <div class="system-photo-grid" aria-label="<?php esc_attr_e('Examples of on-site wastewater systems', 'soil-on-site'); ?>">
+      <figure class="system-photo">
+        <?php sos_image('sos_system_image_one', 'assets/photos/webp/IMG20250123164330.webp', 'assets/photos/opt/IMG20250123164330.jpg', 'Effluent disposal bed on a rural property', 'width="960" height="640" loading="eager" decoding="async"'); ?>
+        <figcaption>Disposal area</figcaption>
+      </figure>
+      <figure class="system-photo">
+        <?php sos_image('sos_system_image_two', 'assets/photos/webp/IMG20251027102323.webp', 'assets/photos/opt/IMG20251027102323.jpg', 'On-site wastewater treatment tank access lids', 'width="960" height="640" loading="eager" decoding="async"'); ?>
+        <figcaption>Treatment system</figcaption>
+      </figure>
     </div>
   </div>
 </section>

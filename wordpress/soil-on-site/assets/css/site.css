@@ -416,7 +416,7 @@ body.admin-bar #site-header {
   max-width: none;
   min-height: 100svh;
   margin-inline: 0;
-  padding: 145px 56px var(--hero-proof-h);
+  padding: 145px 56px calc(var(--hero-proof-h) + 64px);
   overflow: hidden;
 }
 
@@ -425,7 +425,7 @@ body.admin-bar #site-header {
   z-index: 2;
   display: grid;
   gap: 20px;
-  max-width: min(820px, 53vw);
+  max-width: min(940px, 56vw);
 }
 
 .hero-eyebrow {
@@ -433,7 +433,7 @@ body.admin-bar #site-header {
 }
 
 .hero-title {
-  max-width: 820px;
+  max-width: 940px;
   margin: 0;
   color: #071f43;
   font-size: clamp(3.05rem, 4.18vw, 3.42rem);
@@ -547,12 +547,16 @@ body.admin-bar #site-header {
 }
 
 .proof-icon svg {
-  width: 54px;
-  height: 54px;
+  width: 58px;
+  height: 58px;
   stroke: currentColor;
-  stroke-width: 2;
+  stroke-width: 2.35;
   stroke-linecap: round;
   stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.proof-icon svg * {
   vector-effect: non-scaling-stroke;
 }
 
@@ -1602,6 +1606,10 @@ footer {
     min-height: 0;
     margin: 30px -36px -40px;
     padding: 26px 36px 30px;
+  }
+
+  .hero-inner {
+    padding-bottom: 40px;
   }
 
   .hero-photo {

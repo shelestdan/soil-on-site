@@ -144,10 +144,10 @@ function sos_tel_href(string $phone): string
 function sos_proof_icon(int $index): string
 {
     $icons = [
-        '<svg viewBox="0 0 24 24" fill="none"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/><path d="m9 15 2 2 4-4"/></svg>',
-        '<svg viewBox="0 0 24 24" fill="none"><rect x="6" y="5" width="12" height="16" rx="2"/><path d="M9 5a3 3 0 0 1 6 0"/><path d="M9 10h6"/><path d="m9 15 2 2 4-4"/></svg>',
-        '<svg viewBox="0 0 24 24" fill="none"><path d="m3 20 7-12 5 8 3-5 3 9z"/><path d="M10 8 7 20"/><path d="M15 16h6"/></svg>',
-        '<svg viewBox="0 0 24 24" fill="none"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22v-9h6v9"/><path d="M16 14c-3 1-5 3-5 6 4-.4 6.5-2.8 7-6z"/></svg>',
+        '<svg viewBox="0 0 24 24" fill="none"><path d="M10.5 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.706.706l3.588 3.588A2.4 2.4 0 0 1 20 8v6"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="m14 20 2 2 4-4"/></svg>',
+        '<svg viewBox="0 0 24 24" fill="none"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg>',
+        '<svg viewBox="0 0 24 24" fill="none"><path d="m12 8 6-3-6-3v10"/><path d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12"/><path d="m6.49 12.85 11.02 6.3"/><path d="M17.51 12.85 6.5 19.15"/></svg>',
+        '<svg viewBox="0 0 24 24" fill="none"><path d="M10 12V8.964"/><path d="M14 12V8.964"/><path d="M15 12a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2a1 1 0 0 1 1-1z"/><path d="M8.5 21H5a2 2 0 0 1-2-2v-9a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2h-5a2 2 0 0 1-2-2v-2"/></svg>',
     ];
 
     return '<span class="proof-icon" aria-hidden="true">' . ($icons[$index % count($icons)] ?? $icons[0]) . '</span>';

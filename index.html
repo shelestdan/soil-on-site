@@ -668,15 +668,10 @@
         <span>Project intake</span>
         <p>Attach plans where available. Fields marked * are required.</p>
       </div>
-      <!--
-        FormSubmit handles delivery for static hosting, with file upload,
-        honeypot protection, and built-in reCAPTCHA.
-      -->
+      <!-- Server-side PHP handler sends the quote request and checks the honeypot. -->
       <form id="quote-form" name="quote" method="POST" enctype="multipart/form-data"
-            action="https://formsubmit.co/soilonsitensw@gmail.com"
+            action="/send-quote.php"
             novalidate aria-label="Request a quote form">
-        <input type="hidden" name="_subject" value="New Soil On Site quote request" />
-        <input type="hidden" name="_template" value="table" />
 
         <!-- ── Honeypot — hidden from real users, catches bots ── -->
         <div class="hp-field" aria-hidden="true">
@@ -880,7 +875,7 @@
             <span class="btn-spinner" aria-hidden="true"></span>
           </button>
           <p class="form-required-note"><span class="req-star">*</span> Required fields</p>
-          <p class="form-security-note">Security check may open after sending.</p>
+          <p class="form-security-note">Protected by server-side spam checks.</p>
         </div>
 
         <div id="form-success" class="form-success" role="status" tabindex="-1" aria-live="polite">

@@ -4,6 +4,12 @@ declare(strict_types=1);
 const QUOTE_TO = 'soilonsitensw@gmail.com';
 const MAX_UPLOAD_BYTES = 16777216; // 16 MB
 
+function google_tag_html() {
+    return '<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18170578951"></script>'
+        . '<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}'
+        . 'gtag("js",new Date());gtag("config","AW-18170578951");</script>';
+}
+
 function clean_text($value, $max = 2000) {
     $value = is_string($value) ? $value : '';
     $value = str_replace(["\r", "\0"], ['', ''], $value);
@@ -25,6 +31,7 @@ function html_response($title, $message, $ok = true) {
     $safeMessage = htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
     echo '<!doctype html><html lang="en"><head><meta charset="utf-8">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1">';
+    echo google_tag_html();
     echo '<title>' . $safeTitle . ' | Soil On Site</title>';
     echo '<style>body{margin:0;font-family:Arial,sans-serif;background:#eef7ff;color:#0b1f3d;display:grid;min-height:100vh;place-items:center}.box{max-width:620px;margin:24px;padding:34px;border-radius:18px;background:#fff;box-shadow:0 18px 55px rgba(13,54,94,.14)}h1{margin:0 0 14px;font-size:32px}.ok{color:#124f86}.err{color:#b42318}p{font-size:18px;line-height:1.55}a{display:inline-block;margin-top:12px;color:#124f86;font-weight:700}</style>';
     echo '</head><body><main class="box">';
@@ -41,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 if (!empty($_POST['_honey'])) {
-    html_response('Enquiry received', 'Thank you. We will review your details and get back to you.');
+    header('Location: /thank-you.html', true, 303);
+    exit;
 }
 
 $name = clean_text($_POST['name'] ?? '', 100);
@@ -118,4 +126,5 @@ if (!$sent) {
     html_response('Form not sent', 'The server could not send the email. Please email soilonsitensw@gmail.com directly.', false);
 }
 
-html_response('Enquiry received', 'Thank you. We will review your details and get back to you.');
+header('Location: /thank-you.html', true, 303);
+exit;
